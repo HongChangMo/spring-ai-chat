@@ -33,13 +33,13 @@
       "step": 3,
       "title": "Chat Memory",
       "branch": "step3",
-      "passes": false,
+      "passes": true,
       "features": [
-        { "id": "3-1", "name": "InMemoryChatMemory 구성", "passes": false },
-        { "id": "3-2", "name": "MessageChatMemoryAdvisor 적용", "passes": false },
-        { "id": "3-3", "name": "세션 ID 기반 대화 분리", "passes": false },
-        { "id": "3-4", "name": "대화 히스토리 윈도우 설정", "passes": false },
-        { "id": "3-5", "name": "연속 질문 맥락 유지 테스트", "passes": false }
+        { "id": "3-1", "name": "InMemoryChatMemory 구성", "passes": true },
+        { "id": "3-2", "name": "MessageChatMemoryAdvisor 적용", "passes": true },
+        { "id": "3-3", "name": "세션 ID 기반 대화 분리", "passes": true },
+        { "id": "3-4", "name": "대화 히스토리 윈도우 설정", "passes": true },
+        { "id": "3-5", "name": "연속 질문 맥락 유지 테스트", "passes": true }
       ]
     },
     {
