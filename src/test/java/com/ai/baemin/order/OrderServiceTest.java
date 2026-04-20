@@ -1,4 +1,4 @@
-package com.example.baemin.order;
+package com.ai.baemin.order;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

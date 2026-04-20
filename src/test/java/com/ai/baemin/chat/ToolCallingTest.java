@@ -1,6 +1,6 @@
-package com.example.baemin.chat;
+package com.ai.baemin.chat;
 
-import com.example.baemin.order.OrderService;
+import com.ai.baemin.order.OrderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
