@@ -1,4 +1,4 @@
-package com.example.baemin.config;
+package com.ai.baemin.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.context.annotation.Bean;
