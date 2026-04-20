@@ -1,5 +1,6 @@
-package com.example.baemin.controller;
+package com.example.baemin.chat;
 
+import com.example.baemin.order.OrderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ class ChatControllerTest {
     ChatClient chatClient;
 
     @MockBean
-    com.example.baemin.service.OrderService orderService;
+    OrderService orderService;
 
     @Test
     void POST_chat_메시지를_받아_응답을_반환한다() throws Exception {
@@ -35,7 +36,7 @@ class ChatControllerTest {
 
         given(chatClient.prompt()).willReturn(promptSpec);
         given(promptSpec.user(anyString())).willReturn(promptSpec);
-        given(promptSpec.tools(any(com.example.baemin.service.OrderService.class))).willReturn(promptSpec);
+        given(promptSpec.tools(any(OrderService.class))).willReturn(promptSpec);
         given(promptSpec.call()).willReturn(callSpec);
         given(callSpec.content()).willReturn("안녕하세요! 배민 고객 상담입니다.");
 

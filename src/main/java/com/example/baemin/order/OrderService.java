@@ -1,4 +1,4 @@
-package com.example.baemin.service;
+package com.example.baemin.order;
 
 import org.springframework.ai.tool.annotation.Tool;
 import org.springframework.stereotype.Service;

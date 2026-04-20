@@ -1,8 +1,8 @@
-package com.example.baemin.controller;
+package com.example.baemin.chat;
 
-import com.example.baemin.controller.dto.ChatRequest;
-import com.example.baemin.controller.dto.ChatResponse;
-import com.example.baemin.service.OrderService;
+import com.example.baemin.chat.dto.ChatRequest;
+import com.example.baemin.chat.dto.ChatResponse;
+import com.example.baemin.order.OrderService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

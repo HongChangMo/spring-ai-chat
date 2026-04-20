@@ -1,3 +1,3 @@
-package com.example.baemin.controller.dto;
+package com.example.baemin.chat.dto;
 
 public record ChatRequest(String message) {}
