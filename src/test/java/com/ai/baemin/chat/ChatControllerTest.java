@@ -3,6 +3,7 @@ package com.ai.baemin.chat;
 import com.ai.baemin.order.OrderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -29,18 +30,21 @@ class ChatControllerTest {
     @MockBean
     OrderService orderService;
 
+    @MockBean
+    ChatMemory chatMemory;
+
     @Test
     void POST_chat_메시지를_받아_응답을_반환한다() throws Exception {
-        ChatClient.ChatClientRequestSpec promptSpec = mock(ChatClient.ChatClientRequestSpec.class);
+        ChatClient.ChatClientRequestSpec promptSpec =
+                mock(ChatClient.ChatClientRequestSpec.class, org.mockito.Mockito.RETURNS_SELF);
         ChatClient.CallResponseSpec callSpec = mock(ChatClient.CallResponseSpec.class);
 
         given(chatClient.prompt()).willReturn(promptSpec);
-        given(promptSpec.user(anyString())).willReturn(promptSpec);
-        given(promptSpec.tools(any(OrderService.class))).willReturn(promptSpec);
         given(promptSpec.call()).willReturn(callSpec);
         given(callSpec.content()).willReturn("안녕하세요! 배민 고객 상담입니다.");
 
         mockMvc.perform(post("/chat")
+                        .header("X-Session-Id", "session-test")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"message\":\"안녕하세요\"}"))
                 .andExpect(status().isOk())
