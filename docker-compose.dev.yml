@@ -1,0 +1,15 @@
+services:
+  app:
+    image: gradle:8.12-jdk17
+    working_dir: /app
+    volumes:
+      - .:/app
+      - gradle-cache:/root/.gradle
+    ports:
+      - "8080:8080"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    command: ./gradlew bootRun --no-daemon
+
+volumes:
+  gradle-cache:
