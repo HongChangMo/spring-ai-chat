@@ -20,13 +20,13 @@
       "step": 2,
       "title": "Tool Calling",
       "branch": "step2",
-      "passes": false,
+      "passes": true,
       "features": [
-        { "id": "2-1", "name": "Mock 주문 데이터 준비", "passes": false },
-        { "id": "2-2", "name": "@Tool - getOrderStatus(orderId) 주문 상태 조회", "passes": false },
-        { "id": "2-3", "name": "@Tool - trackDelivery(orderId) 배달 위치 추적", "passes": false },
-        { "id": "2-4", "name": "ChatClient에 Tool 등록", "passes": false },
-        { "id": "2-5", "name": "Tool Calling 흐름 테스트", "passes": false }
+        { "id": "2-1", "name": "Mock 주문 데이터 준비", "passes": true },
+        { "id": "2-2", "name": "@Tool - getOrderStatus(orderId) 주문 상태 조회", "passes": true },
+        { "id": "2-3", "name": "@Tool - trackDelivery(orderId) 배달 위치 추적", "passes": true },
+        { "id": "2-4", "name": "ChatClient에 Tool 등록", "passes": true },
+        { "id": "2-5", "name": "Tool Calling 흐름 테스트", "passes": true }
       ]
     },
     {
