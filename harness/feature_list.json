@@ -108,5 +108,20 @@
         { "id": "8-7", "name": "Step 7 리팩토링 - Guardrail", "passes": true }
       ]
     }
+  ],
+  "extras": [
+    {
+      "id": "extra-1",
+      "title": "Swagger API 문서",
+      "branch": "refactor",
+      "passes": false,
+      "features": [
+        { "id": "e1-1", "name": "springdoc-openapi 의존성 추가", "passes": false },
+        { "id": "e1-2", "name": "SwaggerConfig - API 기본 정보 설정", "passes": false },
+        { "id": "e1-3", "name": "ChatController @Operation/@Parameter 어노테이션 적용", "passes": false },
+        { "id": "e1-4", "name": "DTO @Schema 어노테이션 적용", "passes": false },
+        { "id": "e1-5", "name": "Swagger UI 접근 확인", "passes": false }
+      ]
+    }
   ]
 }
