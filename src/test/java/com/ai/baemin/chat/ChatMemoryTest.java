@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -32,6 +33,9 @@ class ChatMemoryTest {
 
     @MockBean
     ChatMemory chatMemory;
+
+    @MockBean
+    VectorStore vectorStore;
 
     private void stubChatClient(String responseContent) {
         ChatClient.ChatClientRequestSpec promptSpec =

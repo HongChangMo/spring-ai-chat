@@ -8,7 +8,9 @@ import com.ai.baemin.order.OrderService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,15 +25,18 @@ public class ChatController {
     private final ChatMemory chatMemory;
     private final InputNormalizationAdvisor inputNormalizationAdvisor;
     private final SystemPromptAdvisor systemPromptAdvisor;
+    private final VectorStore vectorStore;
 
     public ChatController(ChatClient chatClient, OrderService orderService, ChatMemory chatMemory,
                           InputNormalizationAdvisor inputNormalizationAdvisor,
-                          SystemPromptAdvisor systemPromptAdvisor) {
+                          SystemPromptAdvisor systemPromptAdvisor,
+                          VectorStore vectorStore) {
         this.chatClient = chatClient;
         this.orderService = orderService;
         this.chatMemory = chatMemory;
         this.inputNormalizationAdvisor = inputNormalizationAdvisor;
         this.systemPromptAdvisor = systemPromptAdvisor;
+        this.vectorStore = vectorStore;
     }
 
     @PostMapping("/chat")
@@ -53,6 +58,7 @@ public class ChatController {
                 .advisors(
                         inputNormalizationAdvisor,
                         systemPromptAdvisor,
+                        new QuestionAnswerAdvisor(vectorStore),
                         new SimpleLoggerAdvisor(),
                         MessageChatMemoryAdvisor.builder(chatMemory)
                                 .conversationId(sessionId)
