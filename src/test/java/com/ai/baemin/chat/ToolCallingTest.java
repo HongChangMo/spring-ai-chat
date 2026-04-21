@@ -1,5 +1,7 @@
 package com.ai.baemin.chat;
 
+import com.ai.baemin.common.advisor.InputNormalizationAdvisor;
+import com.ai.baemin.common.advisor.SystemPromptAdvisor;
 import com.ai.baemin.order.OrderService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -21,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ChatController.class)
-@Import(OrderService.class)
+@Import({OrderService.class, InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
 class ToolCallingTest {
 
     @Autowired
