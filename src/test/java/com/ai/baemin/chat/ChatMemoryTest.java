@@ -1,6 +1,9 @@
 package com.ai.baemin.chat;
 
+import com.ai.baemin.common.advisor.GuardrailConfig;
+import com.ai.baemin.common.advisor.InputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.InputNormalizationAdvisor;
+import com.ai.baemin.common.advisor.OutputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.SystemPromptAdvisor;
 import com.ai.baemin.order.OrderRepository;
 import com.ai.baemin.order.OrderService;
@@ -23,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ChatController.class)
-@Import({OrderService.class, OrderRepository.class, InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
+@Import({OrderService.class, OrderRepository.class, InputGuardrailAdvisor.class, OutputGuardrailAdvisor.class, GuardrailConfig.class, InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
 class ChatMemoryTest {
 
     @Autowired
@@ -51,7 +54,7 @@ class ChatMemoryTest {
     void 세션ID가_없으면_400을_반환한다() throws Exception {
         mockMvc.perform(post("/chat")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"message\":\"질문\"}"))
+                        .content("{\"message\":\"주문 질문\"}"))
                 .andExpect(status().isBadRequest());
     }
 
@@ -62,7 +65,7 @@ class ChatMemoryTest {
         mockMvc.perform(post("/chat")
                         .header("X-Session-Id", "session-001")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"message\":\"질문\"}"))
+                        .content("{\"message\":\"주문 질문\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.response").value("배민 상담 응답입니다."));
     }
@@ -74,7 +77,7 @@ class ChatMemoryTest {
         mockMvc.perform(post("/chat")
                         .header("X-Session-Id", "session-A")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"message\":\"질문A\"}"))
+                        .content("{\"message\":\"주문 질문A\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.response").value("세션A 응답"));
 
@@ -83,7 +86,7 @@ class ChatMemoryTest {
         mockMvc.perform(post("/chat")
                         .header("X-Session-Id", "session-B")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"message\":\"질문B\"}"))
+                        .content("{\"message\":\"배달 질문B\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.response").value("세션B 응답"));
     }
@@ -95,7 +98,7 @@ class ChatMemoryTest {
         mockMvc.perform(post("/chat")
                         .header("X-Session-Id", "session-001")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"message\":\"첫 번째 질문\"}"))
+                        .content("{\"message\":\"첫 번째 주문 질문\"}"))
                 .andExpect(status().isOk());
 
         stubChatClient("연속 응답 2");
@@ -103,7 +106,7 @@ class ChatMemoryTest {
         mockMvc.perform(post("/chat")
                         .header("X-Session-Id", "session-001")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"message\":\"두 번째 질문\"}"))
+                        .content("{\"message\":\"두 번째 주문 질문\"}"))
                 .andExpect(status().isOk());
     }
 }

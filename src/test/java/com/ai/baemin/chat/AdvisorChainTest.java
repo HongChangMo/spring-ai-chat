@@ -1,6 +1,9 @@
 package com.ai.baemin.chat;
 
+import com.ai.baemin.common.advisor.GuardrailConfig;
+import com.ai.baemin.common.advisor.InputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.InputNormalizationAdvisor;
+import com.ai.baemin.common.advisor.OutputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.SystemPromptAdvisor;
 import com.ai.baemin.order.OrderService;
 import org.junit.jupiter.api.Test;
@@ -21,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ChatController.class)
-@Import({InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
+@Import({InputGuardrailAdvisor.class, OutputGuardrailAdvisor.class, GuardrailConfig.class, InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
 class AdvisorChainTest {
 
     @Autowired
@@ -63,7 +66,7 @@ class AdvisorChainTest {
         mockMvc.perform(post("/chat")
                         .header("X-Session-Id", "session-test")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"message\":\"안녕하세요\"}"))
+                        .content("{\"message\":\"주문 상태 알려줘\"}"))
                 .andExpect(status().isOk());
     }
 }
