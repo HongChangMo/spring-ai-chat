@@ -46,12 +46,12 @@
       "step": 4,
       "title": "Advisor",
       "branch": "step4",
-      "passes": false,
+      "passes": true,
       "features": [
-        { "id": "4-1", "name": "SystemPromptTemplateAdvisor - 상담원 역할 부여", "passes": false },
-        { "id": "4-2", "name": "SimpleLoggerAdvisor - 요청/응답 로깅", "passes": false },
-        { "id": "4-3", "name": "커스텀 Advisor - 입력 정규화", "passes": false },
-        { "id": "4-4", "name": "Advisor 체인 순서 구성", "passes": false }
+        { "id": "4-1", "name": "SystemPromptTemplateAdvisor - 상담원 역할 부여", "passes": true },
+        { "id": "4-2", "name": "SimpleLoggerAdvisor - 요청/응답 로깅", "passes": true },
+        { "id": "4-3", "name": "커스텀 Advisor - 입력 정규화", "passes": true },
+        { "id": "4-4", "name": "Advisor 체인 순서 구성", "passes": true }
       ]
     },
     {
