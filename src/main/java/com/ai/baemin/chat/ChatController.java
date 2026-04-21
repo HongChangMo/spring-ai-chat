@@ -53,7 +53,7 @@ public class ChatController {
             @RequestBody ChatRequest request) {
 
         if (sessionId == null || sessionId.isBlank()) {
-            return ResponseEntity.badRequest().build();
+            throw new IllegalArgumentException("X-Session-Id 헤더가 필요합니다.");
         }
 
         if (request.message() != null && request.message().length() > 500) {
@@ -72,7 +72,8 @@ public class ChatController {
                         new SimpleLoggerAdvisor(),
                         MessageChatMemoryAdvisor.builder(chatMemory)
                                 .conversationId(sessionId)
-                                .build()
+                                .build(),
+                        outputGuardrailAdvisor
                 )
                 .call()
                 .content();

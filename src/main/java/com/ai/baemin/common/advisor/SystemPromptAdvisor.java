@@ -29,6 +29,6 @@ public class SystemPromptAdvisor implements BaseAdvisor {
 
     @Override
     public int getOrder() {
-        return 2;
+        return AdvisorOrder.SYSTEM_PROMPT.value();
     }
 }

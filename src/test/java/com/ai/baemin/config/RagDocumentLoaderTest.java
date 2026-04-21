@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.vectorstore.SearchRequest;
-import org.springframework.ai.vectorstore.SimpleVectorStore;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -35,7 +35,7 @@ class RagDocumentLoaderTest {
     }
 
     @Autowired
-    SimpleVectorStore vectorStore;
+    VectorStore vectorStore;
 
     @Test
     void 앱_시작시_FAQ_문서가_벡터스토어에_로드된다() {

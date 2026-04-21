@@ -47,6 +47,6 @@ public class OutputGuardrailAdvisor implements BaseAdvisor {
 
     @Override
     public int getOrder() {
-        return Integer.MAX_VALUE;
+        return AdvisorOrder.OUTPUT_GUARDRAIL.value();
     }
 }

@@ -11,7 +11,7 @@ class OrderServiceCancelRefundTest {
 
     @BeforeEach
     void setUp() {
-        OrderRepository repository = new OrderRepository();
+        InMemoryOrderRepository repository = new InMemoryOrderRepository();
         repository.save(new OrderData("ORDER-WAIT", OrderStatus.WAITING, "강남구", "치킨버거"));
         repository.save(new OrderData("ORDER-COOK", OrderStatus.COOKING, "서초구", "불고기버거"));
         repository.save(new OrderData("ORDER-DONE", OrderStatus.DELIVERED, "마포구", "새우버거"));
@@ -52,6 +52,13 @@ class OrderServiceCancelRefundTest {
         String result = orderService.requestRefund("ORDER-DONE", "음식 품질 불량");
 
         assertThat(result).contains("환불").contains("확인");
+    }
+
+    @Test
+    void 배달완료_아닌_주문은_환불_불가_메시지를_반환한다() {
+        String result = orderService.requestRefund("ORDER-COOK", "단순 변심");
+
+        assertThat(result).contains("환불할 수 없습니다");
     }
 
     @Test

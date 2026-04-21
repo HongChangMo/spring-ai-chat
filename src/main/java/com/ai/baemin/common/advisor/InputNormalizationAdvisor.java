@@ -6,6 +6,7 @@ import org.springframework.ai.chat.client.advisor.api.AdvisorChain;
 import org.springframework.ai.chat.client.advisor.api.BaseAdvisor;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class InputNormalizationAdvisor implements BaseAdvisor {
 
@@ -28,6 +29,6 @@ public class InputNormalizationAdvisor implements BaseAdvisor {
 
     @Override
     public int getOrder() {
-        return 1;
+        return AdvisorOrder.INPUT_NORMALIZATION.value();
     }
 }
