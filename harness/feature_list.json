@@ -97,7 +97,7 @@
       "step": 8,
       "title": "리팩토링 및 개선",
       "branch": "refactor",
-      "passes": false,
+      "passes": true,
       "features": [
         { "id": "8-1", "name": "Step 1 리팩토링 - 프로젝트 부트스트랩", "passes": true },
         { "id": "8-2", "name": "Step 2 리팩토링 - Tool Calling", "passes": true },
