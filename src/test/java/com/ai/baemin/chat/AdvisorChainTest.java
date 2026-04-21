@@ -6,6 +6,7 @@ import com.ai.baemin.order.OrderService;
 import org.junit.jupiter.api.Test;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -34,6 +35,9 @@ class AdvisorChainTest {
 
     @MockBean
     ChatMemory chatMemory;
+
+    @MockBean
+    VectorStore vectorStore;
 
     @Test
     void 입력이_500자를_초과하면_400을_반환한다() throws Exception {

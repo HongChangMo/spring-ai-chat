@@ -58,13 +58,13 @@
       "step": 5,
       "title": "RAG (Retrieval-Augmented Generation)",
       "branch": "step5",
-      "passes": false,
+      "passes": true,
       "features": [
-        { "id": "5-1", "name": "FAQ / 환불 정책 샘플 문서 준비", "passes": false },
-        { "id": "5-2", "name": "EmbeddingModel 설정", "passes": false },
-        { "id": "5-3", "name": "SimpleVectorStore 구성 및 문서 임베딩", "passes": false },
-        { "id": "5-4", "name": "QuestionAnswerAdvisor - RAG 파이프라인 연결", "passes": false },
-        { "id": "5-5", "name": "RAG 기반 답변 품질 테스트", "passes": false }
+        { "id": "5-1", "name": "FAQ / 환불 정책 샘플 문서 준비", "passes": true },
+        { "id": "5-2", "name": "EmbeddingModel 설정", "passes": true },
+        { "id": "5-3", "name": "SimpleVectorStore 구성 및 문서 임베딩", "passes": true },
+        { "id": "5-4", "name": "QuestionAnswerAdvisor - RAG 파이프라인 연결", "passes": true },
+        { "id": "5-5", "name": "RAG 기반 답변 품질 테스트", "passes": true }
       ]
     },
     {
