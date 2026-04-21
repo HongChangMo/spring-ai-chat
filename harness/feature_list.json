@@ -84,13 +84,13 @@
       "step": 7,
       "title": "Guardrail",
       "branch": "step7",
-      "passes": false,
+      "passes": true,
       "features": [
-        { "id": "7-1", "name": "출력 Guardrail - 개인정보(전화번호, 주소) 마스킹", "passes": false },
-        { "id": "7-2", "name": "입력 Guardrail - 범위 외 질문 거절", "passes": false },
-        { "id": "7-3", "name": "프롬프트 인젝션 방어 패턴", "passes": false },
-        { "id": "7-4", "name": "전체 흐름 통합 테스트", "passes": false },
-        { "id": "7-5", "name": "README 및 아키텍처 다이어그램 작성", "passes": false }
+        { "id": "7-1", "name": "출력 Guardrail - 개인정보(전화번호, 주소) 마스킹", "passes": true },
+        { "id": "7-2", "name": "입력 Guardrail - 범위 외 질문 거절", "passes": true },
+        { "id": "7-3", "name": "프롬프트 인젝션 방어 패턴", "passes": true },
+        { "id": "7-4", "name": "전체 흐름 통합 테스트", "passes": true },
+        { "id": "7-5", "name": "README 및 아키텍처 다이어그램 작성", "passes": true }
       ]
     }
   ]

@@ -1,6 +1,9 @@
 package com.ai.baemin.chat;
 
+import com.ai.baemin.common.advisor.GuardrailConfig;
+import com.ai.baemin.common.advisor.InputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.InputNormalizationAdvisor;
+import com.ai.baemin.common.advisor.OutputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.SystemPromptAdvisor;
 import com.ai.baemin.order.OrderRepository;
 import com.ai.baemin.order.OrderService;
@@ -25,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ChatController.class)
-@Import({OrderService.class, OrderRepository.class, InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
+@Import({OrderService.class, OrderRepository.class, InputGuardrailAdvisor.class, OutputGuardrailAdvisor.class, GuardrailConfig.class, InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
 class CancelRefundIntegrationTest {
 
     @Autowired
