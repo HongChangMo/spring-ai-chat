@@ -6,3 +6,10 @@ spring:
         options:
           model: gpt-4o
 
+chat:
+  memory:
+    window-size: 10
+
+rag:
+  document-paths: docs/faq.txt,docs/refund-policy.txt
+

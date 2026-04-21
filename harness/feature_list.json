@@ -92,6 +92,21 @@
         { "id": "7-4", "name": "전체 흐름 통합 테스트", "passes": true },
         { "id": "7-5", "name": "README 및 아키텍처 다이어그램 작성", "passes": true }
       ]
+    },
+    {
+      "step": 8,
+      "title": "리팩토링 및 개선",
+      "branch": "refactor",
+      "passes": true,
+      "features": [
+        { "id": "8-1", "name": "Step 1 리팩토링 - 프로젝트 부트스트랩", "passes": true },
+        { "id": "8-2", "name": "Step 2 리팩토링 - Tool Calling", "passes": true },
+        { "id": "8-3", "name": "Step 3 리팩토링 - Chat Memory", "passes": true },
+        { "id": "8-4", "name": "Step 4 리팩토링 - Advisor", "passes": true },
+        { "id": "8-5", "name": "Step 5 리팩토링 - RAG", "passes": true },
+        { "id": "8-6", "name": "Step 6 리팩토링 - 취소/환불 처리", "passes": true },
+        { "id": "8-7", "name": "Step 7 리팩토링 - Guardrail", "passes": true }
+      ]
     }
   ]
 }

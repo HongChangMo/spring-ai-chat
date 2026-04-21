@@ -48,9 +48,10 @@ ChatController
 | 2 | step2 | Tool Calling | `@Tool` — 주문 상태 조회, 배달 위치 추적 |
 | 3 | step3 | Chat Memory | `InMemoryChatMemory`, 세션 ID 기반 대화 분리 |
 | 4 | step4 | Advisor | `SystemPromptAdvisor`, `SimpleLoggerAdvisor`, 커스텀 Advisor |
-| 5 | step5 | RAG | `SimpleVectorStore`, `QuestionAnswerAdvisor`, FAQ/환불 문서 임베딩 |
+| 5 | step5 | RAG | `VectorStore`, `QuestionAnswerAdvisor`, FAQ/환불 문서 임베딩 |
 | 6 | step6 | 취소/환불 | 2단계 확인 흐름, `cancelOrder`, `requestRefund` Tool |
 | 7 | step7 | Guardrail | 입력 검증(인젝션/범위), 출력 마스킹(전화번호·주소) |
+| 8 | refactor | 리팩토링 | DIP 적용, Enum 도입, SRP 분리, 설정 외부화 |
 
 ---
 
@@ -59,10 +60,10 @@ ChatController
 ```
 com.ai.baemin
 ├── chat/               # AI 채팅 (Controller, DTO)
-├── order/              # 주문 도메인 (@Tool, OrderRepository, OrderStatus)
+├── order/              # 주문 도메인 (@Tool, OrderRepository 인터페이스, InMemoryOrderRepository, OrderStatus)
 ├── common/
-│   └── advisor/        # Advisor, Guardrail, GuardrailConfig
-└── config/             # Spring Bean 설정 (ChatClient, VectorStore)
+│   └── advisor/        # Advisor, AdvisorOrder(Enum), GuardrailProperties(인터페이스), GuardrailConfig
+└── config/             # Spring Bean 설정 (ChatClientConfig, ChatMemoryConfig, VectorStoreConfig)
 ```
 
 ---
@@ -79,7 +80,7 @@ com.ai.baemin
 | `trackDelivery(orderId)` | 배달 위치 추적 |
 | `cancelOrder(orderId)` | 취소 가능 여부 확인 + 확인 메시지 반환 |
 | `confirmCancelOrder(orderId)` | 취소 확정 (CANCELLED) |
-| `requestRefund(orderId, reason)` | 환불 요청 확인 메시지 반환 |
+| `requestRefund(orderId, reason)` | 환불 요청 확인 메시지 반환 (배달 완료 상태만 가능) |
 | `confirmRefund(orderId)` | 환불 확정 (REFUNDED) |
 
 취소·환불은 2단계 확인 흐름으로 동작합니다 — Tool이 확인 메시지를 반환하면 AI가 사용자에게 전달하고, 사용자 확인 후 confirm Tool이 실제 상태를 변경합니다.
@@ -91,8 +92,9 @@ com.ai.baemin
 
 ### RAG (Step 5)
 
-`src/main/resources/docs/`의 FAQ와 환불 정책 문서를 `SimpleVectorStore`에 임베딩.  
-`QuestionAnswerAdvisor`가 질문 관련 문서를 검색해 컨텍스트로 주입합니다.
+`src/main/resources/docs/`의 FAQ와 환불 정책 문서를 `VectorStore`에 임베딩.  
+`QuestionAnswerAdvisor`가 질문 관련 문서를 검색해 컨텍스트로 주입합니다.  
+문서 경로는 `application.yml`의 `rag.document-paths`로 관리합니다.
 
 ### Guardrail (Step 7)
 
@@ -104,7 +106,8 @@ com.ai.baemin
 - 전화번호: `010-1234-5678` → `010-****-****`
 - 주소 상세: `역삼동 123-4` → `역삼동 ***`
 
-패턴 목록은 `GuardrailConfig`에서 Java 설정으로 관리합니다 (재컴파일 없이 수정 불가 — 운영 환경에서는 `@ConfigurationProperties` 방식이 유연합니다).
+패턴 목록은 `GuardrailConfig`에서 Java 설정으로 관리합니다 (재컴파일 없이 수정 불가 — 운영 환경에서는 `@ConfigurationProperties` 방식이 유연합니다).  
+`GuardrailConfig`는 `GuardrailProperties` 인터페이스를 구현하며, `InputGuardrailAdvisor`는 인터페이스에 의존합니다(DIP).
 
 ---
 
@@ -151,6 +154,7 @@ curl -X POST http://localhost:8080/chat \
 - [x] Step 5: RAG
 - [x] Step 6: 취소/환불 처리
 - [x] Step 7: Guardrail
+- [x] Step 8: 리팩토링 (DIP, Enum, SRP, 설정 외부화)
 
 ---
 

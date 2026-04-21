@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class InputGuardrailAdvisor implements BaseAdvisor {
 
-    private final GuardrailConfig config;
+    private final GuardrailProperties config;
 
-    public InputGuardrailAdvisor(GuardrailConfig config) {
+    public InputGuardrailAdvisor(GuardrailProperties config) {
         this.config = config;
     }
 
@@ -43,6 +43,6 @@ public class InputGuardrailAdvisor implements BaseAdvisor {
 
     @Override
     public int getOrder() {
-        return 0;
+        return AdvisorOrder.INPUT_GUARDRAIL.value();
     }
 }

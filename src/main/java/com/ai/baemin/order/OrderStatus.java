@@ -21,4 +21,8 @@ public enum OrderStatus {
     public boolean isCancellable() {
         return this == WAITING;
     }
+
+    public boolean isRefundable() {
+        return this == DELIVERED;
+    }
 }

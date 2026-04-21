@@ -4,6 +4,8 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.reader.TextReader;
 import org.springframework.ai.vectorstore.SimpleVectorStore;
+import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,16 +17,19 @@ import java.util.List;
 @Configuration
 public class VectorStoreConfig {
 
+    @Value("${rag.document-paths}")
+    private List<String> documentPaths;
+
     @Bean
-    public SimpleVectorStore vectorStore(EmbeddingModel embeddingModel) {
+    public VectorStore vectorStore(EmbeddingModel embeddingModel) {
         return SimpleVectorStore.builder(embeddingModel).build();
     }
 
     @Bean
-    public ApplicationRunner documentLoader(SimpleVectorStore vectorStore) {
+    public ApplicationRunner documentLoader(VectorStore vectorStore) {
         return args -> {
             List<Document> documents = new ArrayList<>();
-            for (String path : List.of("docs/faq.txt", "docs/refund-policy.txt")) {
+            for (String path : documentPaths) {
                 TextReader reader = new TextReader(new ClassPathResource(path));
                 documents.addAll(reader.read());
             }

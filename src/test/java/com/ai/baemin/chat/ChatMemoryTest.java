@@ -5,7 +5,7 @@ import com.ai.baemin.common.advisor.InputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.InputNormalizationAdvisor;
 import com.ai.baemin.common.advisor.OutputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.SystemPromptAdvisor;
-import com.ai.baemin.order.OrderRepository;
+import com.ai.baemin.order.InMemoryOrderRepository;
 import com.ai.baemin.order.OrderService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ChatController.class)
-@Import({OrderService.class, OrderRepository.class, InputGuardrailAdvisor.class, OutputGuardrailAdvisor.class, GuardrailConfig.class, InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
+@Import({OrderService.class, InMemoryOrderRepository.class, InputGuardrailAdvisor.class, OutputGuardrailAdvisor.class, GuardrailConfig.class, InputNormalizationAdvisor.class, SystemPromptAdvisor.class})
 class ChatMemoryTest {
 
     @Autowired
