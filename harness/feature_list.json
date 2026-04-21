@@ -71,13 +71,13 @@
       "step": 6,
       "title": "취소/환불 처리",
       "branch": "step6",
-      "passes": false,
+      "passes": true,
       "features": [
-        { "id": "6-1", "name": "@Tool - cancelOrder(orderId) 주문 취소", "passes": false },
-        { "id": "6-2", "name": "@Tool - requestRefund(orderId, reason) 환불 요청", "passes": false },
-        { "id": "6-3", "name": "취소 가능 조건 검증 로직 (조리 시작 후 불가)", "passes": false },
-        { "id": "6-4", "name": "위험 액션 실행 전 사용자 확인 단계", "passes": false },
-        { "id": "6-5", "name": "Step 2 Tool과 통합 테스트", "passes": false }
+        { "id": "6-1", "name": "@Tool - cancelOrder(orderId) 주문 취소", "passes": true },
+        { "id": "6-2", "name": "@Tool - requestRefund(orderId, reason) 환불 요청", "passes": true },
+        { "id": "6-3", "name": "취소 가능 조건 검증 로직 (조리 시작 후 불가)", "passes": true },
+        { "id": "6-4", "name": "위험 액션 실행 전 사용자 확인 단계", "passes": true },
+        { "id": "6-5", "name": "Step 2 Tool과 통합 테스트", "passes": true }
       ]
     },
     {

@@ -11,7 +11,7 @@ class OrderServiceTest {
 
     @BeforeEach
     void setUp() {
-        orderService = new OrderService();
+        orderService = new OrderService(new OrderRepository());
     }
 
     @Test
