@@ -1,0 +1,127 @@
+{
+  "project": "spring-ai-chat",
+  "description": "배민 고객 상담 모티브 Spring AI 학습 프로젝트",
+  "steps": [
+    {
+      "step": 1,
+      "title": "프로젝트 부트스트랩",
+      "branch": "step1",
+      "passes": true,
+      "features": [
+        { "id": "1-1", "name": "Spring Boot + Spring AI 의존성 설정", "passes": true },
+        { "id": "1-2", "name": "ChatClient 빈 구성 (ChatClientConfig)", "passes": true },
+        { "id": "1-3", "name": "POST /chat 엔드포인트 구현", "passes": true },
+        { "id": "1-4", "name": "ChatRequest / ChatResponse DTO", "passes": true },
+        { "id": "1-5", "name": "Docker / docker-compose 환경 구성", "passes": true },
+        { "id": "1-6", "name": "ChatControllerTest (TDD)", "passes": true }
+      ]
+    },
+    {
+      "step": 2,
+      "title": "Tool Calling",
+      "branch": "step2",
+      "passes": true,
+      "features": [
+        { "id": "2-1", "name": "Mock 주문 데이터 준비", "passes": true },
+        { "id": "2-2", "name": "@Tool - getOrderStatus(orderId) 주문 상태 조회", "passes": true },
+        { "id": "2-3", "name": "@Tool - trackDelivery(orderId) 배달 위치 추적", "passes": true },
+        { "id": "2-4", "name": "ChatClient에 Tool 등록", "passes": true },
+        { "id": "2-5", "name": "Tool Calling 흐름 테스트", "passes": true }
+      ]
+    },
+    {
+      "step": 3,
+      "title": "Chat Memory",
+      "branch": "step3",
+      "passes": true,
+      "features": [
+        { "id": "3-1", "name": "InMemoryChatMemory 구성", "passes": true },
+        { "id": "3-2", "name": "MessageChatMemoryAdvisor 적용", "passes": true },
+        { "id": "3-3", "name": "세션 ID 기반 대화 분리", "passes": true },
+        { "id": "3-4", "name": "대화 히스토리 윈도우 설정", "passes": true },
+        { "id": "3-5", "name": "연속 질문 맥락 유지 테스트", "passes": true }
+      ]
+    },
+    {
+      "step": 4,
+      "title": "Advisor",
+      "branch": "step4",
+      "passes": true,
+      "features": [
+        { "id": "4-1", "name": "SystemPromptTemplateAdvisor - 상담원 역할 부여", "passes": true },
+        { "id": "4-2", "name": "SimpleLoggerAdvisor - 요청/응답 로깅", "passes": true },
+        { "id": "4-3", "name": "커스텀 Advisor - 입력 정규화", "passes": true },
+        { "id": "4-4", "name": "Advisor 체인 순서 구성", "passes": true }
+      ]
+    },
+    {
+      "step": 5,
+      "title": "RAG (Retrieval-Augmented Generation)",
+      "branch": "step5",
+      "passes": true,
+      "features": [
+        { "id": "5-1", "name": "FAQ / 환불 정책 샘플 문서 준비", "passes": true },
+        { "id": "5-2", "name": "EmbeddingModel 설정", "passes": true },
+        { "id": "5-3", "name": "SimpleVectorStore 구성 및 문서 임베딩", "passes": true },
+        { "id": "5-4", "name": "QuestionAnswerAdvisor - RAG 파이프라인 연결", "passes": true },
+        { "id": "5-5", "name": "RAG 기반 답변 품질 테스트", "passes": true }
+      ]
+    },
+    {
+      "step": 6,
+      "title": "취소/환불 처리",
+      "branch": "step6",
+      "passes": true,
+      "features": [
+        { "id": "6-1", "name": "@Tool - cancelOrder(orderId) 주문 취소", "passes": true },
+        { "id": "6-2", "name": "@Tool - requestRefund(orderId, reason) 환불 요청", "passes": true },
+        { "id": "6-3", "name": "취소 가능 조건 검증 로직 (조리 시작 후 불가)", "passes": true },
+        { "id": "6-4", "name": "위험 액션 실행 전 사용자 확인 단계", "passes": true },
+        { "id": "6-5", "name": "Step 2 Tool과 통합 테스트", "passes": true }
+      ]
+    },
+    {
+      "step": 7,
+      "title": "Guardrail",
+      "branch": "step7",
+      "passes": true,
+      "features": [
+        { "id": "7-1", "name": "출력 Guardrail - 개인정보(전화번호, 주소) 마스킹", "passes": true },
+        { "id": "7-2", "name": "입력 Guardrail - 범위 외 질문 거절", "passes": true },
+        { "id": "7-3", "name": "프롬프트 인젝션 방어 패턴", "passes": true },
+        { "id": "7-4", "name": "전체 흐름 통합 테스트", "passes": true },
+        { "id": "7-5", "name": "README 및 아키텍처 다이어그램 작성", "passes": true }
+      ]
+    },
+    {
+      "step": 8,
+      "title": "리팩토링 및 개선",
+      "branch": "refactor",
+      "passes": true,
+      "features": [
+        { "id": "8-1", "name": "Step 1 리팩토링 - 프로젝트 부트스트랩", "passes": true },
+        { "id": "8-2", "name": "Step 2 리팩토링 - Tool Calling", "passes": true },
+        { "id": "8-3", "name": "Step 3 리팩토링 - Chat Memory", "passes": true },
+        { "id": "8-4", "name": "Step 4 리팩토링 - Advisor", "passes": true },
+        { "id": "8-5", "name": "Step 5 리팩토링 - RAG", "passes": true },
+        { "id": "8-6", "name": "Step 6 리팩토링 - 취소/환불 처리", "passes": true },
+        { "id": "8-7", "name": "Step 7 리팩토링 - Guardrail", "passes": true }
+      ]
+    }
+  ],
+  "extras": [
+    {
+      "id": "extra-1",
+      "title": "Swagger API 문서",
+      "branch": "refactor",
+      "passes": true,
+      "features": [
+        { "id": "e1-1", "name": "springdoc-openapi 의존성 추가", "passes": true },
+        { "id": "e1-2", "name": "SwaggerConfig - API 기본 정보 설정", "passes": true },
+        { "id": "e1-3", "name": "ChatController @Operation/@Parameter 어노테이션 적용", "passes": true },
+        { "id": "e1-4", "name": "DTO @Schema 어노테이션 적용", "passes": true },
+        { "id": "e1-5", "name": "Swagger UI 접근 확인", "passes": true }
+      ]
+    }
+  ]
+}
