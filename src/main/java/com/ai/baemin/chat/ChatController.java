@@ -7,6 +7,9 @@ import com.ai.baemin.common.advisor.InputNormalizationAdvisor;
 import com.ai.baemin.common.advisor.OutputGuardrailAdvisor;
 import com.ai.baemin.common.advisor.SystemPromptAdvisor;
 import com.ai.baemin.order.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "Chat", description = "고객 상담 채팅 API")
 @RestController
 public class ChatController {
 
@@ -47,9 +51,10 @@ public class ChatController {
         this.vectorStore = vectorStore;
     }
 
+    @Operation(summary = "채팅 메시지 전송", description = "사용자 메시지를 AI 상담원에게 전송하고 응답을 반환합니다.")
     @PostMapping("/chat")
     public ResponseEntity<ChatResponse> chat(
-            @RequestHeader(value = "X-Session-Id", required = false) String sessionId,
+            @Parameter(description = "대화 세션 ID", required = true) @RequestHeader(value = "X-Session-Id", required = false) String sessionId,
             @RequestBody ChatRequest request) {
 
         if (sessionId == null || sessionId.isBlank()) {
